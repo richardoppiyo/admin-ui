@@ -1,0 +1,35 @@
+.inputbox {
+ width: 90%;
+}
+
+.innerbox {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.infodiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mybuttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.inerfooter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 40%;
+}
