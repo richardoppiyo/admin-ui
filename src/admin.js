@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './admin.css';
+import { RiDeleteBin7Line } from 'react-icons/ri';
+import { FiEdit } from 'react-icons/fi';
 import { displayAdmins } from './redux/Admin';
 
 const Admin = () => {
@@ -16,9 +18,16 @@ const Admin = () => {
 
   //   const filtered = admins.filter((item) => item.adminname).includes(adminer).toLowerCase();
 
-  const filtered = admins.filter((item) => (item.adminname.toLowerCase()
-  || item.email.toLowerCase() || item.role.toLowerCase())
-    .includes(adminer.toLowerCase()));
+  //   const filtered = admins.filter((item) => ((item.email.toLowerCase())
+  //    || (item.adminname.toLowerCase()))
+  //     .includes(adminer.toLowerCase()));
+
+  // eslint-disable-next-line max-len
+  const filtered = admins.filter((item) => Object.keys(item).some((key) => item[key].toLowerCase().includes(adminer.toLowerCase())));
+
+  //     const filtered = admins.filter((item) => (item.adminname.toLowerCase()
+  //   || item.email.toLowerCase() || item.role.toLowerCase())
+  //     .includes(adminer.toLowerCase()));
 
   console.log(filtered);
   return (
@@ -53,8 +62,12 @@ const Admin = () => {
                   <p>{admin.email}</p>
                   <p>{admin.role}</p>
                   <div className="mybuttons">
-                    <p>Actions</p>
-                    <button type="button">C</button>
+                    <button type="button">
+                      <FiEdit />
+                    </button>
+                    <button type="button">
+                      <RiDeleteBin7Line />
+                    </button>
                   </div>
                 </div>
 
