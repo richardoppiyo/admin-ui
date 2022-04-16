@@ -14,7 +14,6 @@ export function load(admin) {
 export const displayAdmins = () => async (dispatch) => {
   const admins = await getAdmins();
   const tempArray = [];
-  //   console.log(admins);
   Object.keys(admins).forEach((id) => {
     tempArray.push({
       id: admins[id].id,
@@ -23,16 +22,13 @@ export const displayAdmins = () => async (dispatch) => {
       role: admins[id].role,
     });
   });
-  //   console.log('following');
-  //   console.log(tempArray);
-  //   console.log('folloewd');
   dispatch(load(tempArray));
 };
 
 export default function adminReducer(state = init, action) {
   switch (action.type) {
     case LOAD:
-      return [...state, ...action.admin];
+      return action.admin;
     default:
       return state;
   }
