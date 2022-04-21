@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './admin.css';
 import { RiDeleteBin7Line } from 'react-icons/ri';
 import { FiEdit } from 'react-icons/fi';
@@ -8,6 +9,7 @@ import { displayAdmins } from './redux/Admin';
 const Admin = () => {
   const admins = useSelector((state) => state.admin);
   const [adminer, setAdmin] = useState('');
+  // const [editing, setEditing] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,20 +18,23 @@ const Admin = () => {
     }
   }, []);
 
-  //   const filtered = admins.filter((item) => item.adminname).includes(adminer).toLowerCase();
+  // const handleEditing = (id) => {
+  //   console.log(id);
+  //   setEditing(true);
+  // };
 
-  //   const filtered = admins.filter((item) => ((item.email.toLowerCase())
-  //    || (item.adminname.toLowerCase()))
-  //     .includes(adminer.toLowerCase()));
+  // const viewMode = {};
+  // const editMode = {};
+
+  // if (editing) {
+  //   viewMode.display = 'none';
+  // } else {
+  //   editMode.display = 'none';
+  // }
 
   // eslint-disable-next-line max-len
   const filtered = admins.filter((item) => Object.keys(item).some((key) => item[key].toLowerCase().includes(adminer.toLowerCase())));
 
-  //     const filtered = admins.filter((item) => (item.adminname.toLowerCase()
-  //   || item.email.toLowerCase() || item.role.toLowerCase())
-  //     .includes(adminer.toLowerCase()));
-
-  console.log(filtered);
   return (
     <>
       <div className="outerbox">
@@ -57,13 +62,22 @@ const Admin = () => {
             ) : (
               filtered.map((admin) => (
                 <div key={admin.id} className="infodiv">
+                  {/* <tr className="infodiv">
+                    <input type="checkbox" />
+                    <td>{admin.adminname}</td>
+                    <td>{admin.email}</td>
+                    <td>{admin.role}</td>
+                  </tr> */}
                   <input type="checkbox" />
                   <p>{admin.adminname}</p>
                   <p>{admin.email}</p>
                   <p>{admin.role}</p>
                   <div className="mybuttons">
                     <button type="button">
-                      <FiEdit />
+                      <Link to={`/Edit/${admin.id}`} style={{ color: '#fff' }}>
+                        <FiEdit />
+                      </Link>
+                      {/* <FiEdit value={admin.id} onClick={handleEditing} /> */}
                     </button>
                     <button type="button">
                       <RiDeleteBin7Line />
@@ -89,26 +103,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-// !filtered.length ? (
-//   <div className="heading">Enter a valid country!</div>
-// ) : (
-//   filtered.map((country) => (
-//     <div key="{country.id}" className="innerdiv">
-//       <div className="insidediv">
-//         <Link to={`/Details/${country.country}`} style={{ color: '#fff' }}>
-//           <BsArrowRightCircle />
-//         </Link>
-//       </div>
-//       <img className="flag" src={`${country.flag}`} alt="hello" />
-//       <div className="detailer">
-//         <p className="contryname">{country.country}</p>
-//         <p className="contrycases">
-//           Cases:
-//           {' '}
-//           {country.cases}
-//         </p>
-//       </div>
-//     </div>
-//   ))
-// );
